@@ -30,6 +30,8 @@ namespace MEDITRACK.COMMON.Entities
         public string? CreatedBy { get; set; }
         public DateTime? ModifiedDate { get; set; }
         public string? ModifiedBy { get; set; }
+        public string? PatientName { get; set; }
+        public Guid? PatientID { get; set; }
         public List<MedicalTestsEntity> MedicalTests { get; set; }
         public List<TreatmentsEntity> Treatments { get; set; }
 

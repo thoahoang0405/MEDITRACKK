@@ -13,9 +13,9 @@ namespace MEDITRACK.COMMON.Entities
     public class FamilyMembersEntity
     {
         [Key]
-        public Guid FamilyID { get; set; }
+        public Guid PatientID { get; set; }
         public Guid UserID { get; set; }
-        public string FullName { get; set; }
+        public string PatientName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string Relationship { get; set; }
         public string PhoneNumber { get; set; }
