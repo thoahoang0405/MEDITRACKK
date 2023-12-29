@@ -10,5 +10,7 @@ namespace MEDITRACK.DL.NoticeDL
 {
     public interface INotificationDL:IBaseDL<NotificationsEntity>
     {
+        public IEnumerable<dynamic> GetAppointmentDay(Guid id);
+        public IEnumerable<dynamic> GetPrescriptionDay(Guid id);
     }
 }

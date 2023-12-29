@@ -47,25 +47,9 @@ namespace MEDITRACK.BaseControllers
             {
                 var numberOfAffectedRows = _baseBL.InsertRecord(record);
 
+                return StatusCode(StatusCodes.Status200OK, numberOfAffectedRows);
 
-                if (numberOfAffectedRows.ErrorCode== MISAErrorCode.Ok)
-                {
-                    return StatusCode(StatusCodes.Status201Created, numberOfAffectedRows.ErrorCode);
 
-                }
-                else
-                {
-                    
-                        return StatusCode(StatusCodes.Status400BadRequest, new ErrorResult 
-                        { 
-                            ErrorCode=numberOfAffectedRows.ErrorCode,
-                            Message=numberOfAffectedRows.ErrorMessage,
-                            Data=numberOfAffectedRows.Errors
-                        });
-                   
-                }
-               
-                
             }
             catch (Exception e)
             {
@@ -88,22 +72,7 @@ namespace MEDITRACK.BaseControllers
                 var numberOfAffectedRows = _baseBL.UpdateRecord(entity,id);
 
 
-                if (numberOfAffectedRows.ErrorCode == MISAErrorCode.Ok)
-                {
-                    return StatusCode(StatusCodes.Status200OK, numberOfAffectedRows.ErrorCode);
-
-                }
-                else
-                {
-
-                    return StatusCode(StatusCodes.Status400BadRequest, new ErrorResult
-                    {
-                        ErrorCode = numberOfAffectedRows.ErrorCode,
-                        Message = numberOfAffectedRows.ErrorMessage,
-                        Data = numberOfAffectedRows.Errors
-                    });
-
-                }
+                return StatusCode(StatusCodes.Status200OK, numberOfAffectedRows);
 
 
             }
@@ -149,8 +118,8 @@ namespace MEDITRACK.BaseControllers
         /// <param name="GetRecordID"></param>
         ///<returns>về status500 hoặc status400 nếu lỗi ; return về status200 nếu thành công </returns>
         /// CreatedBy: HTTHOA(16/03/2023)
-        [HttpGet("{id}")]
-        public IActionResult GetRecordID([FromRoute] Guid id)
+        [HttpGet("id")]
+        public IActionResult GetRecordID( Guid id)
         {
             try
 
@@ -176,29 +145,7 @@ namespace MEDITRACK.BaseControllers
 
         }
 
-        /// <summary>
-        /// Lấy mã  mới
-        /// </summary>
-        /// <param name=""></param>
-        /// ><returns>về status500 hoặc status400 nếu lỗi ; return về status200 nếu thành công </returns>
-        /// CreatedBy: HTTHOA(16/03/2023)
-        [HttpGet("NewCode")]
-        public IActionResult GetNewCode()
-        {
-            try
-
-            {
-                string newCode = _baseBL.GetNewCode();
-                return StatusCode(StatusCodes.Status200OK, newCode);
-
-            }
-            catch (Exception ex)
-            {
-
-                return StatusCode(StatusCodes.Status500InternalServerError, ErrorResource.ServerException);
-            }
-        }
-
+       
         /// <summary>
         /// API xóa 1 bản ghi
         /// </summary>

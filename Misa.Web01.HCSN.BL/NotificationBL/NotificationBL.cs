@@ -18,5 +18,14 @@ namespace MEDITRACK.BL.NoticeBL
         }
 
         #endregion
+
+        public IEnumerable<dynamic> GetAppointmentDay(Guid id)
+        {
+            return _NotificationDL.GetAppointmentDay(id);
+        }
+        public IEnumerable<dynamic> GetPrescriptionDay(Guid id)
+        {
+            return _NotificationDL.GetPrescriptionDay(id);
+        }
     }
 }

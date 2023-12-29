@@ -9,5 +9,7 @@ namespace MEDITRACK.BL.NoticeBL
 {
     public interface INotificationBL : IBaseBL<NotificationsEntity>
     {
+        public IEnumerable<dynamic> GetAppointmentDay(Guid id);
+        public IEnumerable<dynamic> GetPrescriptionDay(Guid id);
     }
 }

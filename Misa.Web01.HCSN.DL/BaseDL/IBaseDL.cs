@@ -23,7 +23,7 @@ namespace MEDITRACK.BL
         /// <param name="entity, id"></param>
         /// <returns></returns>
         /// CreatedBy: HTTHOA(15/03/2023)
-        public int UpdateRecord(T entity,Guid id);
+        public Guid UpdateRecord(T entity,Guid id);
 
         /// <summary>
         /// API lấy tất cả bản ghi
@@ -39,15 +39,9 @@ namespace MEDITRACK.BL
         /// <param name="id"></param>
         /// <returns></returns>
         /// CreatedBy: HTTHOA(16/03/2023)
-        public T GetRecordByID(Guid id);
+        public IEnumerable<dynamic> GetRecordByID(Guid id);
 
-        /// <summary>
-        /// API lấy mã mới
-        /// </summary>
-        /// <param name=""></param>
-        /// <returns></returns>
-        /// CreatedBy: HTTHOA(16/03/2023)
-        public string GetNewCode();
+       
 
         /// <summary>
         /// API xóa bản ghi
@@ -56,12 +50,7 @@ namespace MEDITRACK.BL
         /// <returns></returns>
         /// CreatedBy: HTTHOA(16/03/2023)
         public int DeleteRecordID(Guid id);
-        /// <summary>
-        ///check mã code
-        /// </summary>
-        /// <param name="record"></param>
-        /// <returns></returns>
-        /// CreatedBy: HTTHOA(20/03/2023)
-        public bool CheckDuplicateCode(T record);
+
+       
     }
 }

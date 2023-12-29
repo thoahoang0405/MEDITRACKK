@@ -10,5 +10,9 @@ namespace MEDITRACK.DL.AccountDL
 {
     public interface IUserDL:IBaseDL<UsersEntity>
     {
+        public UsersEntity GetUsers(string userName);
+        public UsersEntity InsertUser(UsersEntity record);
+        public UserDetailsEntity GetUserDetail(Guid id);
+        public Guid UpdateUserDetail(UserDetailsEntity entity, Guid id);
     }
 }

@@ -12,10 +12,14 @@ namespace MEDITRACK.BL.RecordBL
         public PagingData FilterChoose(
        string? keyword,
        int? pageSize,
-       int? pageNumber
+       int? pageNumber,
+            Guid id
 
        );
         public RecordsEntity InsertRecord(RecordsEntity record);
         public RecordsEntity UpdateRecord(RecordsEntity record);
+        public IEnumerable<dynamic> GetDetailMedicalTest(Guid id);
+        public IEnumerable<dynamic> GetDetailTreatment(Guid id);
+        public Guid DeleteRecords(Guid id);
     }
 }

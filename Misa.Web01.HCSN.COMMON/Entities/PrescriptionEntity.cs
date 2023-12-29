@@ -32,6 +32,7 @@ namespace MEDITRACK.COMMON.Entities
         public string?   ModifiedBy { get; set; }
 
         public List<MedicationsEntity> Medications { get; set; }
+        public List<NotificationsEntity> Notice { get; set; }
 
     }
 }

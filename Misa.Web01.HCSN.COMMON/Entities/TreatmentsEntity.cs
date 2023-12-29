@@ -15,12 +15,12 @@ namespace MEDITRACK.COMMON.Entities
         [Key]
         public Guid TreatmentID { get; set; }
         public Guid RecordID { get; set; }
-        public string Diagnosis { get; set; }
-        public DateTime TreatmentDate { get; set; }
-        public string TreatmentDescription { get; set; }
-        public string MedicalHistory { get; set; }
-        public string PrescriptionName { get; set; }
-        public string Notes { get; set; }
+        public string? Diagnosis { get; set; }
+        public DateTime? TreatmentDate { get; set; }
+        public string? TreatmentDescription { get; set; }
+        public string? MedicalHistory { get; set; }
+        public string? PrescriptionName { get; set; }
+        public string? Notes { get; set; }
         public DateTime? CreatedDate { get; set; }
         public string? CreatedBy { get; set; }
         public DateTime? ModifiedDate { get; set; }

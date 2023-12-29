@@ -9,5 +9,9 @@ namespace MEDITRACK.BL.AppointmentBL
 {
     public interface IAppointmentBL:IBaseBL<AppointmentEntity>
     {
+        public IEnumerable<dynamic> GetAllAppointments(string? keyword, Guid id);
+        public AppointmentEntity GetAppoitntById(Guid id);
+        public AppointmentEntity InsertAppointment(AppointmentEntity record);
+        public AppointmentEntity UpdateAppointment(AppointmentEntity record);
     }
 }

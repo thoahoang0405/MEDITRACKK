@@ -1,7 +1,9 @@
 ﻿using MEDITRACK.BaseControllers;
 using MEDITRACK.BL;
+using MEDITRACK.BL.BaseBL;
 using MEDITRACK.BL.NoticeBL;
 using MEDITRACK.COMMON.Entities;
+using MEDITRACK.COMMON.Resource;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +17,52 @@ namespace MEDITRACK.Controllers
         public NotificationsController(INotificationBL notification) : base(notification)
         {
             _notificationBL = notification;
+        }
+        [HttpGet("appointmentDay")]
+        public IActionResult GetAppointmentDay([FromQuery] Guid id)
+        {
+            try
+
+            {
+                var records = _notificationBL.GetAppointmentDay(id);
+
+                if (records != null)
+                {
+                    return StatusCode(StatusCodes.Status200OK, records);
+                }
+                else
+                {
+                    return StatusCode(StatusCodes.Status404NotFound, ErrorResource.NotFound);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ErrorResource.ServerException);
+            }
+        }
+        [HttpGet("presDay")]
+        public IActionResult GetPrescriptionDay([FromQuery] Guid id)
+        {
+            try
+
+            {
+                var records = _notificationBL.GetPrescriptionDay(id);
+
+                if (records != null)
+                {
+                    return StatusCode(StatusCodes.Status200OK, records);
+                }
+                else
+                {
+                    return StatusCode(StatusCodes.Status404NotFound, ErrorResource.NotFound);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ErrorResource.ServerException);
+            }
         }
     }
 }

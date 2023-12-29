@@ -15,14 +15,17 @@ namespace MEDITRACK.COMMON.Entities
         [Key]
         public Guid NoticeID { get; set; }
         public Guid UserID { get; set; }
-        public string NoticeName { get; set; }
+        public string? NoticeName { get; set; }
         public DateTime NoticeDate { get; set;}
+        public DateTime? ToDate { get; set; }
         public int NoticeStatus { get; set;}
-        public int NoticeType { get; set;}
-        public int NoticeOfUser { get; set;}
+        public string? NoticeType { get; set;}
+        public string? NoticeOfUser { get; set;}
         public DateTime? CreatedDate { get; set; }
         public string? CreatedBy { get; set; }
         public DateTime? ModifiedDate { get; set; }
         public string? ModifiedBy { get; set; }
+        public Guid? TypeID { get; set; }
     }
+
 }

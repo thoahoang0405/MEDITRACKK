@@ -22,16 +22,13 @@ namespace MEDITRACK.DL.RecordDL
         public PagingData FilterChoose(
        string? keyword,
        int? pageSize,
-       int? pageNumber
-
+       int? pageNumber , Guid id
        )
         {
 
             string storedProcedureName = "Proc_records_getPaging";
 
             var orConditions = new List<string>();
-            var andConditions = new List<string>();
-            var requiredConditions = new List<string>();
             string whereClause = "";
 
 
@@ -48,30 +45,27 @@ namespace MEDITRACK.DL.RecordDL
             if (orConditions.Count() > 0)
             {
                 condition = string.Join(" OR ", orConditions);
-                if (andConditions.Count() > 0)
-                {
-                    condition = "(" + condition + ") AND " + String.Join(" AND ", andConditions);
-                }
-            }
-            else if (andConditions.Count() > 0)
-            {
-                condition = string.Join(" AND ", andConditions);
-                if (orConditions.Count() > 0)
-                {
-                    condition = "(" + condition + ") AND " + String.Join(" AND ", andConditions);
 
-                }
             }
+
             else
             {
                 condition = "";
             }
             if (condition != "")
             {
-                whereClause = "(" + whereClause + ") AND (" + condition + ")";
+                whereClause = "(" + condition + ")";
             }
 
+            if (whereClause != "" )
+            {
 
+                whereClause = whereClause + $" AND UserID= '{id}'";
+            }
+            else
+            {
+                whereClause = $"UserID= '{id}'";
+            }
             var parameters = new DynamicParameters();
             parameters.Add("v_Sort", "ModifiedDate DESC");
 
@@ -236,11 +230,11 @@ namespace MEDITRACK.DL.RecordDL
                     {
                         int deleteTest = DeleteMedicalTest(record.RecordID);
                         int deleteTreat = DeleteTreat(record.RecordID);
-                        if (deleteTest > 0 && deleteTreat>0)
+                        if (deleteTest > 0 && deleteTreat > 0)
                         {
                             int resultMedical = this.InsertMedicalTests(record.RecordID, medicalTests, sqlConnection, trans: trans);
                             int resultTreatments = this.InsertTreatments(record.RecordID, treatments, sqlConnection, trans: trans);
-                            if (resultMedical > 0 && resultTreatments>0)
+                            if (resultMedical > 0 && resultTreatments > 0)
                             {
                                 trans.Commit();
                                 return record;
@@ -355,6 +349,41 @@ namespace MEDITRACK.DL.RecordDL
             }
             return 0;
         }
+        public Guid DeleteRecords(Guid id)
+        {
+
+            string sqlCommand = $"DELETE FROM records Where RecordID='{id}'";
+            var parameters = new DynamicParameters();
+            using (var sqlConnection = new MySqlConnection(_connectionDB))
+            {
+                sqlConnection.Open();
+                using (MySqlTransaction trans = sqlConnection.BeginTransaction())
+                {
+
+                    int deleteTest = DeleteMedicalTest(id);
+                    int deleteTreat = DeleteTreat(id);
+                    if (deleteTest > 0 && deleteTreat > 0)
+                    {
+                        int numberOfAffectedRows = sqlConnection.Execute(sqlCommand, parameters);
+
+                        if (numberOfAffectedRows > 0)
+                        {
+                            trans.Commit();
+                            return id;
+
+                        }
+                        else
+                        {
+                            trans.Rollback();
+                            return Guid.Empty;
+                        }
+
+                    }
+                    trans.Rollback();
+                    return Guid.Empty;
+                }
+            }
+        }
 
         public int DeleteMedicalTest(Guid id)
         {
@@ -399,6 +428,33 @@ namespace MEDITRACK.DL.RecordDL
                 {
                     return 0;
                 }
+            }
+        }
+
+        public IEnumerable<dynamic> GetDetailMedicalTest(Guid id)
+        {
+            using (var sqlConnection = new MySqlConnection(_connectionDB))
+            {
+
+                string className = EntityUtilities.GetTableName<MedicalTestsEntity>();
+                string sqlCommand = $"SELECT * FROM {className} Where RecordID='{id}'";
+                var parameters = new DynamicParameters();
+                return sqlConnection.Query(sqlCommand);
+
+
+            }
+        }
+        public IEnumerable<dynamic> GetDetailTreatment(Guid id)
+        {
+            using (var sqlConnection = new MySqlConnection(_connectionDB))
+            {
+
+                string className = EntityUtilities.GetTableName<TreatmentsEntity>();
+                string sqlCommand = $"SELECT * FROM {className} Where RecordID='{id}'";
+                var parameters = new DynamicParameters();
+                return sqlConnection.Query(sqlCommand);
+
+
             }
         }
     }

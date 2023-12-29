@@ -1,5 +1,6 @@
 ﻿using MEDITRACK.BL;
 using MEDITRACK.COMMON.Entities;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,10 @@ namespace MEDITRACK.DL.PrescriptionDL
         public PagingData FilterChoose(
       string? keyword,
       int? pageSize,
-      int? pageNumber
+      int? pageNumber, Guid id
 
       );
+        public IEnumerable<dynamic> GetDetailMedication(Guid id);
         public PrescriptionEntity InsertPrescription(PrescriptionEntity record);
         public PrescriptionEntity UpdatePrescription(PrescriptionEntity record);
     }

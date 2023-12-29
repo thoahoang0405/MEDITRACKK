@@ -15,7 +15,7 @@ namespace MEDITRACK.BL
         /// <param name="record"></param>
         /// <returns></returns>
         /// CreatedBy: HTTHOA(15/03/2023)
-        public ErrorService InsertRecord(T record);
+        public Guid InsertRecord(T record);
 
         /// <summary>
         /// API sửa bản ghi
@@ -23,7 +23,7 @@ namespace MEDITRACK.BL
         /// <param name="record"></param>
         /// <returns></returns>
         /// CreatedBy: HTTHOA(15/03/2023)
-        public ErrorService UpdateRecord(T entity, Guid id);
+        public Guid UpdateRecord(T entity, Guid id);
 
         /// <summary>
         /// APIlấy tất cả bản ghi
@@ -47,15 +47,9 @@ namespace MEDITRACK.BL
         /// <param name="id"></param>
         /// <returns></returns>
         /// CreatedBy: HTTHOA(16/03/2023)
-        public T GetRecordByID(Guid id);
+        public IEnumerable<dynamic> GetRecordByID(Guid id);
 
-        /// <summary>
-        /// API lấy mã mới
-        /// </summary>
-        /// <param name=""></param>
-        /// <returns></returns>
-        /// CreatedBy: HTTHOA(16/03/2023)
-        public string GetNewCode();
+        
        
     }
 }
