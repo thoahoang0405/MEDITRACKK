@@ -4,6 +4,7 @@ using MEDITRACK.BL.BaseBL;
 using MEDITRACK.BL.PrescriptionBL;
 using MEDITRACK.COMMON.Entities;
 using MEDITRACK.COMMON.Resource;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MySqlX.XDevAPI.Common;
@@ -21,6 +22,7 @@ namespace MEDITRACK.Controllers
             _prescriptionBL = prescriptionBL;
 
         }
+        [Authorize]
         [HttpPost("Filter")]
         [SwaggerResponse(StatusCodes.Status200OK, type: typeof(PagingData))]
         [SwaggerResponse(StatusCodes.Status400BadRequest)]
@@ -50,6 +52,7 @@ namespace MEDITRACK.Controllers
         [SwaggerResponse(statusCode: StatusCodes.Status200OK)]
         [SwaggerResponse(statusCode: StatusCodes.Status400BadRequest)]
         [SwaggerResponse(statusCode: StatusCodes.Status500InternalServerError)]
+        [Authorize]
         [HttpPost("user")]
         public IActionResult InsertPrescription([FromBody] PrescriptionEntity record)
         {
@@ -60,6 +63,7 @@ namespace MEDITRACK.Controllers
         [SwaggerResponse(statusCode: StatusCodes.Status200OK)]
         [SwaggerResponse(statusCode: StatusCodes.Status400BadRequest)]
         [SwaggerResponse(statusCode: StatusCodes.Status500InternalServerError)]
+        [Authorize]
         [HttpPut("user")]
         public IActionResult UpdatePrescription([FromBody] PrescriptionEntity record)
         {
@@ -67,7 +71,7 @@ namespace MEDITRACK.Controllers
             return StatusCode(StatusCodes.Status200OK, result);
         }
 
-
+        [Authorize]
         [HttpGet("medications")]
         public IActionResult GetDetailMedication(Guid id)
         {

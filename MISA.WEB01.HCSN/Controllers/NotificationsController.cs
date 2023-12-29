@@ -4,6 +4,7 @@ using MEDITRACK.BL.BaseBL;
 using MEDITRACK.BL.NoticeBL;
 using MEDITRACK.COMMON.Entities;
 using MEDITRACK.COMMON.Resource;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +19,7 @@ namespace MEDITRACK.Controllers
         {
             _notificationBL = notification;
         }
+        [Authorize]
         [HttpGet("appointmentDay")]
         public IActionResult GetAppointmentDay([FromQuery] Guid id)
         {
@@ -41,6 +43,7 @@ namespace MEDITRACK.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ErrorResource.ServerException);
             }
         }
+        [Authorize]
         [HttpGet("presDay")]
         public IActionResult GetPrescriptionDay([FromQuery] Guid id)
         {

@@ -111,6 +111,7 @@ namespace MEDITRACK.Controllers
         [SwaggerResponse(statusCode: StatusCodes.Status200OK)]
         [SwaggerResponse(statusCode: StatusCodes.Status400BadRequest)]
         [SwaggerResponse(statusCode: StatusCodes.Status500InternalServerError)]
+        [Authorize]
         [HttpPut("userDetail")]
         public IActionResult UpdateUserDetail([FromBody] UserDetailsEntity entity, [FromRoute] Guid id)
         {

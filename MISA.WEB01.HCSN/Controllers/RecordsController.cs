@@ -4,6 +4,7 @@ using MEDITRACK.BL.BaseBL;
 using MEDITRACK.BL.RecordBL;
 using MEDITRACK.COMMON.Entities;
 using MEDITRACK.COMMON.Resource;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -19,6 +20,7 @@ namespace MEDITRACK.Controllers
         {
             _recordBL = recordBL;
         }
+        [Authorize]
         [HttpPost("Filter")]
         [SwaggerResponse(StatusCodes.Status200OK, type: typeof(PagingData))]
         [SwaggerResponse(StatusCodes.Status400BadRequest)]
@@ -48,6 +50,7 @@ namespace MEDITRACK.Controllers
         [SwaggerResponse(statusCode: StatusCodes.Status200OK)]
         [SwaggerResponse(statusCode: StatusCodes.Status400BadRequest)]
         [SwaggerResponse(statusCode: StatusCodes.Status500InternalServerError)]
+        [Authorize]
         [HttpPost("records")]
         public IActionResult InsertRecord(RecordsEntity record)
         {
@@ -58,6 +61,7 @@ namespace MEDITRACK.Controllers
         [SwaggerResponse(statusCode: StatusCodes.Status200OK)]
         [SwaggerResponse(statusCode: StatusCodes.Status400BadRequest)]
         [SwaggerResponse(statusCode: StatusCodes.Status500InternalServerError)]
+        [Authorize]
         [HttpPut("records")]
         public IActionResult UpdateRecord([FromBody] RecordsEntity record)
         {
@@ -65,6 +69,7 @@ namespace MEDITRACK.Controllers
             return StatusCode(StatusCodes.Status200OK, result);
         }
 
+        [Authorize]
         [HttpGet("medicaltest")]
         public IActionResult GetDetailMedicalTest(Guid id)
         {
@@ -88,7 +93,7 @@ namespace MEDITRACK.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ErrorResource.ServerException);
             }
         }
-
+        [Authorize]
         [HttpGet("treatment")]
         public IActionResult GetDetailTreatment(Guid id)
         {
@@ -112,7 +117,7 @@ namespace MEDITRACK.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ErrorResource.ServerException);
             }
         }
-        
+        [Authorize]
         [HttpDelete("records")]
         public IActionResult DeleteRecord([FromQuery]  Guid RecordID)
         {

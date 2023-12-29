@@ -2,6 +2,7 @@
 using MEDITRACK.BL.AppointmentBL;
 using MEDITRACK.COMMON.Entities;
 using MEDITRACK.COMMON.Resource;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -22,7 +23,7 @@ namespace MEDITRACK.Controllers
             _appointmentBL = appointmentBL;
         }
         #endregion
-
+        [Authorize]
         [HttpGet("appointments")]
         public IActionResult GetAllAppointments(string? keyword , Guid id)
         {
@@ -46,6 +47,7 @@ namespace MEDITRACK.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ErrorResource.ServerException);
             }
         }
+        [Authorize]
         [HttpGet("appointmentID")]
         public IActionResult GetAppoitntById(Guid id)
         {
@@ -75,6 +77,7 @@ namespace MEDITRACK.Controllers
         [SwaggerResponse(statusCode: StatusCodes.Status200OK)]
         [SwaggerResponse(statusCode: StatusCodes.Status400BadRequest)]
         [SwaggerResponse(statusCode: StatusCodes.Status500InternalServerError)]
+        [Authorize]
         [HttpPost("user")]
         public IActionResult InsertAppointment([FromBody] AppointmentEntity record)
         {
@@ -85,6 +88,7 @@ namespace MEDITRACK.Controllers
         [SwaggerResponse(statusCode: StatusCodes.Status200OK)]
         [SwaggerResponse(statusCode: StatusCodes.Status400BadRequest)]
         [SwaggerResponse(statusCode: StatusCodes.Status500InternalServerError)]
+        [Authorize]
         [HttpPut("user")]
         public IActionResult UpdateAppointment([FromBody] AppointmentEntity record)
         {
