@@ -19,9 +19,9 @@ namespace MEDITRACK.BL.AppointmentBL
 
         #endregion
 
-        public IEnumerable<dynamic> GetAllAppointments(string? keyword ,Guid id)
+        public IEnumerable<dynamic> GetAllAppointments(string? keyword ,Guid id, int? status)
         {
-            return _appointmentDL.GetAllAppointments(keyword,id);
+            return _appointmentDL.GetAllAppointments(keyword,id,status);
         }
         public AppointmentEntity GetAppoitntById(Guid id)
         {

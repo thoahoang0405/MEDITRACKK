@@ -25,12 +25,12 @@ namespace MEDITRACK.Controllers
         #endregion
         [Authorize]
         [HttpGet("appointments")]
-        public IActionResult GetAllAppointments(string? keyword , Guid id)
+        public IActionResult GetAllAppointments(string? keyword , Guid id, int? status )
         {
             try
 
             {
-                var records = _appointmentBL.GetAllAppointments(keyword,id);
+                var records = _appointmentBL.GetAllAppointments(keyword,id, status);
 
                 if (records != null)
                 {

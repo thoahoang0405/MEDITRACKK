@@ -26,7 +26,7 @@ namespace MEDITRACK.DL.PrescriptionDL
         string? keyword,
         int? pageSize,
         int? pageNumber
-            , Guid id
+            , Guid id, int? status
 
         )
         {
@@ -65,11 +65,15 @@ namespace MEDITRACK.DL.PrescriptionDL
             if(whereClause != "")
             {
 
-            whereClause = whereClause + $" AND UserID= '{id}'"   ;
+            whereClause = whereClause + $" AND UserID= '{id}' "   ;
             }
             else
             {
                 whereClause = $"UserID= '{id}'";
+            }
+            if(status!=null)
+            {
+                whereClause = whereClause + $" AND PrescriptionStatus= '{status}' ";
             }
             var parameters = new DynamicParameters();
             parameters.Add("v_Sort", "ModifiedDate DESC");

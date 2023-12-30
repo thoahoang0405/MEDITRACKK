@@ -13,7 +13,7 @@ namespace MEDITRACK.BL.PrescriptionBL
     string? keyword,
     int? pageSize,
     int? pageNumber
-, Guid id
+, Guid id, int? status
     );
         public IEnumerable<dynamic> GetDetailMedication(Guid id);
         public PrescriptionEntity InsertPrescription(PrescriptionEntity record);

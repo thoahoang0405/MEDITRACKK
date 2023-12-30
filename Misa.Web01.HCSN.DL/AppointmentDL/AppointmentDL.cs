@@ -21,12 +21,18 @@ namespace MEDITRACK.DL.AppointmentDL
 
         #endregion
 
-        public IEnumerable<dynamic> GetAllAppointments(string? keyword, Guid id)
+        public IEnumerable<dynamic> GetAllAppointments(string? keyword, Guid id, int? status )
         {
             using (var sqlConnection = new MySqlConnection(_connectionDB))
             {
                 string className = EntityUtilities.GetTableName<AppointmentEntity>();
-                var getAllRecords = $"SELECT * FROM {className} WHERE UserID = '{id}' AND AppointmentName LIKE '%{keyword}%'";
+                var getAllRecords = "";
+                 getAllRecords = $"SELECT * FROM {className} WHERE UserID = '{id}' AND AppointmentName LIKE '%{keyword}%'";
+                if (status != null)
+                {
+                     getAllRecords = $"SELECT * FROM {className} WHERE UserID = '{id}' AND AppointmentStatus ={status} AND  AppointmentName LIKE '%{keyword}%'";
+
+                }
                 var records = sqlConnection.Query(getAllRecords);
 
                 return records;

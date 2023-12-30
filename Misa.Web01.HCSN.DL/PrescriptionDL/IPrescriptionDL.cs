@@ -14,7 +14,7 @@ namespace MEDITRACK.DL.PrescriptionDL
         public PagingData FilterChoose(
       string? keyword,
       int? pageSize,
-      int? pageNumber, Guid id
+      int? pageNumber, Guid id, int? status
 
       );
         public IEnumerable<dynamic> GetDetailMedication(Guid id);

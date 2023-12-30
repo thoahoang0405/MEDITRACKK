@@ -32,13 +32,14 @@ namespace MEDITRACK.Controllers
         [FromQuery] int? pageSize,
 
         [FromQuery] int pageNumber,
-            [FromQuery] Guid id
+            [FromQuery] Guid id,
+             [FromQuery] int? status
 
         )
         {
 
 
-            var multipleResults = _prescriptionBL.FilterChoose(keyword, pageSize, pageNumber, id);
+            var multipleResults = _prescriptionBL.FilterChoose(keyword, pageSize, pageNumber, id, status);
             if (multipleResults != null)
             {
                 return StatusCode(StatusCodes.Status200OK, multipleResults);
@@ -78,7 +79,7 @@ namespace MEDITRACK.Controllers
             try
 
             {
-                var records =_prescriptionBL.GetDetailMedication(id);
+                var records = _prescriptionBL.GetDetailMedication(id);
 
                 if (records != null)
                 {

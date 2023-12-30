@@ -23,12 +23,12 @@ namespace MEDITRACK.BL.PrescriptionBL
         public PagingData FilterChoose(
       string? keyword,
       int? pageSize,
-      int? pageNumber, Guid id
+      int? pageNumber, Guid id, int? status
 
       )
 
         {
-            return _prescriptionDL.FilterChoose( keyword, pageSize, pageNumber ,id);
+            return _prescriptionDL.FilterChoose( keyword, pageSize, pageNumber ,id,status);
         }
         public IEnumerable<dynamic> GetDetailMedication(Guid id)
         {
